@@ -18,7 +18,9 @@ To change in next version
 
 - xWR18xx requires twice the data rate as 2 lanes in DCA are not used and all zeros are sent
 - ROS node config can be improved 
-- xWR14xx and xWR14xx should be made to take the same config file
+- xWR14xx and xWR18xx should be made to take the same config file
+
+More testing required with the 18xx radar.
 
 
 Important notes
