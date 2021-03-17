@@ -1,0 +1,79 @@
+/* THIS IS A GENERATED FILE -- DO NOT EDIT */
+
+var targ = xdc.module('ti.targets.arm.elf.R4Ft');
+/* configuro was told the platform explicitly */
+var platform = 'ti.platforms.cortexR:IWR14XX:false:200';
+
+/* decide whether to make an assembly or an executable */
+var makeAssembly = false;
+
+
+var Executable = xdc.module('xdc.bld.Executable');
+
+var exeOpts = new Executable.Attrs({
+        cfgScript: 'C:/ti/mmwave_sdk_02_01_00_04/packages/ti/drivers/test/lvds_stream/xwr14xx/mss.cfg',
+        profile: 'release',
+        cfgHome: 'mss_configPkg_xwr14xx',
+        xsopts: "-DMMWAVE_SDK_DEVICE_TYPE=xwr14xx",
+});
+
+exeOpts.cfgArgs = 'null';
+exeOpts.cfgArgsEncoded = true;
+
+var exe = Pkg[makeAssembly ? 'addAssembly': 'addExecutable'](
+    'mss',
+    targ,
+    platform,
+    exeOpts
+);
+
+/*
+ * Generate the compiler.opt file
+ * Do this here instead of during the initial creation of the configuro
+ * package, because the contents of any config.bld script are unknown
+ * at that time. Config.bld can't be executed until the XDC build phase.
+ */
+if (makeAssembly) {
+    var suffix = targ.dllExt || '.p' + targ.suffix;
+}
+else {
+    var suffix = '.p' + targ.suffix;
+}
+
+var thisObj = {
+    cfg:        'xwr14xx/mss.cfg',
+    outputPath: 'C:/ti/mmwave_sdk_02_01_00_04/packages/ti/drivers/test/lvds_stream/xwr14xx/mss_configPkg_xwr14xx',
+    exeName:    'mss' + suffix,
+    exeIntName: 'mss' + suffix.replace('.', '_'),
+    targ:       targ,
+    linkerCommandFile: 'linker.cmd',
+    compilerOptFile: 'compiler.opt',
+    compilerDefsFile: 'compiler.opt' + ".defs",
+    makeAssembly: makeAssembly
+};
+var tmpl = xdc.loadTemplate('xdc/tools/configuro/template/compiler.opt.xdt');
+tmpl.genFile('compiler.opt', thisObj, [], false);
+
+/*
+ * Generate the custom makefile.
+ */
+var tmpl = xdc.loadTemplate('xdc/tools/configuro/template/' + 
+    (makeAssembly? 'custom.mak.asm.xdt' : 'custom.mak.exe.xdt'));
+tmpl.genFile('custom.mak', thisObj, [], false);
+Pkg.makeEpilogue = "include custom.mak";
+
+/*
+ * Generate the package script.
+ */
+var tmpl = xdc.loadTemplate('xdc/tools/configuro/template/package.xs.xdt');
+tmpl.genFile('package.xs', thisObj, [], false);
+
+if (makeAssembly) {
+/*
+ * Generate the linker options into a staging file, so that the presence or
+ * age of the advertised linker command file can be the makefile trigger to
+ * rebuild the package from the user's config script.
+ */
+    var tmpl = xdc.loadTemplate('xdc/tools/configuro/template/linker.cmd.asm.xdt');
+    tmpl.genFile('linker.cmd.cp', thisObj, [], false);
+}

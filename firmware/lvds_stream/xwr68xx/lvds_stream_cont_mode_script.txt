@@ -1,0 +1,30 @@
+% ********************************************************************
+% * Sample DEMO Script
+% ********************************************************************
+
+flushCfg
+dfeDataOutputMode 2
+channelCfg 2 1 0
+adcCfg 2 1
+lowPower 0 0
+contModeCfg 77 0 0 6000 0 0 30 1 1024
+testFmkCfg 0 0 1 1
+
+% ********************************************************************
+% Please select one of the CLI commands below to stream out data
+% ********************************************************************
+
+% ********************************************************************
+% Raw Mode:
+%   - No headers are added to the streams.
+% ********************************************************************
+setProfileCfg disable ADC disable
+
+% ********************************************************************
+% Data Segregated Mode:
+%   - Headers are added to the streams.
+% ********************************************************************
+setProfileCfg enable ADC disable
+
+sensorStart
+

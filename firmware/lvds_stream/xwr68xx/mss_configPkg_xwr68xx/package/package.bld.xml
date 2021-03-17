@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="mss_configPkg_xwr68xx" version="" producerId="undefined">
+    <units>
+    </units>
+    <sources>
+        <srcFile name="package/cfg/mss_per4ft.c"/>
+    </sources>
+    <configscripts>
+        <srcFile name="C:/ti/mmwave_sdk_02_01_00_04/packages/ti/demo/lvds_stream/xwr68xx/mss.cfg"/>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/cfg/mss_per4ft.mak" src="package.bld"/>
+        <srcFile name="package/cfg/mss_per4ft.oer4ft.dep" src="package/cfg/mss_per4ft.c"/>
+        <srcFile name="package/cfg/mss_per4ft.dep" src="package/cfg/mss_per4ft.cfg"/>
+        <srcFile name="package/cfg/mss.xer4ft.mak" src="package.bld"/>
+        <srcFile name="package/rel/mss_configPkg_xwr68xx.tar.dep" src="package/rel/mss_configPkg_xwr68xx.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.arm.elf.R4Ft"
+            version="ti.targets.arm.elf.R4Ft{1,0,16.9,6"
+            rawVersion="16.9.6"
+            platform="ti.platforms.cortexR:AWR14XX:1"
+            isa="v7R"
+            suffix="er4ft"
+            rootDir="C:/ti/ti-cgt-arm_16.9.6.LTS"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    </libraries>
+    <configurations>
+    <configuration name="mss"
+        pname="mss.per4ft"
+        target="ti.targets.arm.elf.R4Ft"
+        platform="ti.platforms.cortexR:IWR68XX:false:200"
+        profile="release"
+        isPartial="false"
+        xCfgScript="package/cfg/mss_per4ft.cfg"
+        xCfgPrefix="package/cfg/mss_per4ft"
+        cfgScript="C:/ti/mmwave_sdk_02_01_00_04/packages/ti/demo/lvds_stream/xwr68xx/mss.cfg"
+        cfgArgs="null"
+        />
+    </configurations>
+    <executables>
+    <executable name="mss"
+        pname="mss.xer4ft"
+        target="ti.targets.arm.elf.R4Ft"
+        platform="ti.platforms.cortexR:IWR68XX:false:200"
+        profile="release"
+        xCfgScript="package/cfg/mss_per4ft.cfg"
+        xCfgPrefix="package/cfg/mss_per4ft"
+        cfgScript="C:/ti/mmwave_sdk_02_01_00_04/packages/ti/demo/lvds_stream/xwr68xx/mss.cfg"
+        cfgArgs="null"
+        />
+    </executables>
+    <tests>
+    <test exeName="mss.xer4ft"
+        args=""
+        groupName="mss.xer4ft"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs=""
+        />
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="mss_configPkg_xwr68xx"
+        pname="mss_configPkg_xwr68xx.tar"
+        label="default"
+    >
+        <file name="package/package.bld.xml"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>
